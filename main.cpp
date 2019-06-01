@@ -3,6 +3,7 @@
 #include <map>
 #include "./personContainer/person.h"
 #include "./timer/timer.h"
+#include "./functions/insertElement.h"
 
 
 std::vector<person::Person> preparePeopleList( const long elementsNumber)
@@ -23,6 +24,9 @@ int main(int argc, char ** argv)
    {
         std::vector<person::Person> listOfPersons {};
         listOfPersons = preparePeopleList(1000);
+
+        std::vector<Timer> timers;
+        std::vector<long long> ids;
         
         for(auto person : listOfPersons)
         {

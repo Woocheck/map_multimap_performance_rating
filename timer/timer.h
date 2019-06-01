@@ -6,7 +6,7 @@
 #include <ctime>
 
 
-class timer
+class Timer
 {
     private:
         std::string id;
@@ -15,8 +15,8 @@ class timer
         std::chrono::duration<double> duration;
 
     public:
-        timer();
-        timer(const std::string& s): id(s){};
+        Timer();
+        Timer(const std::string& s): id(s){};
 
         void start()
         {
