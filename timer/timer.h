@@ -5,7 +5,12 @@
 #include <chrono>
 #include <ctime>
 
-
+struct DurationTime
+{
+    std::string containerType {};
+    long numberElementsInContainer {};
+    std::chrono::duration<double> duration;
+};
 class Timer
 {
     private:
@@ -15,7 +20,7 @@ class Timer
         std::chrono::duration<double> duration;
 
     public:
-        Timer();
+        Timer() = default;
         Timer(const std::string& s): id(s){};
 
         void start()
@@ -29,10 +34,15 @@ class Timer
             duration = timerStop - timerStart;
         }
 
-        std::chrono::duration<double> getDuration()
+        std::chrono::duration<double> getDuration() const
         {
             return duration;
         }
+
+        bool operator < (const Timer& compared ) const
+    {
+        return ( duration < compared.getDuration() );
+    }
 };
 
 #endif
