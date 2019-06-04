@@ -4,12 +4,22 @@
 #include <iostream>
 #include <chrono>
 #include <ctime>
+#include <typeindex>
+#include <typeinfo>
+
+enum class TypesOfTests {makeColection, insertElement, findElement, deleteElement };
 
 struct DurationTime
 {
-    std::string containerType {};
+    
+    std::string containerType;
+    TypesOfTests testType {};
     long numberElementsInContainer {};
     std::chrono::duration<double> duration;
+    DurationTime() = default;
+    DurationTime(std::string type): containerType(type) {};
+    
+    
 };
 class Timer
 {
