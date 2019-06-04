@@ -5,6 +5,7 @@
 #include <vector>
 #include <unordered_map>
 #include <map>
+#include <iterator>
 #include <algorithm>
 #include "../personContainer/person.h"
 #include "../timer/timer.h"
@@ -27,7 +28,7 @@ std::chrono::duration<double> averageTimeValue( std::vector<Timer>& listOfTimers
 }
 
 template <class Map>
-std::chrono::duration<double> testMakeMapOfPersons( Map& map, 
+std::chrono::duration<double> makeMapOfPersons( Map& map, 
                               const std::vector<person::Person>& listOfPersons,  
                               long long recordsNumber )
 {
@@ -39,7 +40,7 @@ std::chrono::duration<double> testMakeMapOfPersons( Map& map,
 
         for( auto person : listOfPersons )
         {   
-            map[ keySeed * 10 ] = person;
+            map.insert( std::make_pair( keySeed * 10 , person ) );
             keySeed++;
         }
     
@@ -50,6 +51,16 @@ std::chrono::duration<double> testMakeMapOfPersons( Map& map,
     return averageTimeValue( listOfTimers );
 }
 
+template<class Map>
+void printMap( const Map& mapToPrint )
+{
+    for(auto person : mapToPrint)
+        {
+            std::cout << person.first << " - " << person.second.name << " ";
+            std::cout << person.second.surname << " age: " << person.second.age;
+            std::cout << " " << person.second.city << " PESEL: " << person.second.pesel << std::endl;
+        }
+}
 
 
 #endif 
