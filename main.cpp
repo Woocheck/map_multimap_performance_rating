@@ -7,7 +7,8 @@
 #include "./mapFunctions/makeMap.h"
 #include "./mapFunctions/insertElement.h"
 #include "./mapFunctions/deleteElement.h"
-
+#include "./result.h"
+#include "./testingFunctions/testMap.h"
 
 
 
@@ -22,33 +23,27 @@ std::vector<person::Person> preparePeopleList( const long elementsNumber)
     return peopleVector;
 }
 
-template<class Map>
-void printMap( const Map& mapToPrint )
-{
-    for(auto person : mapToPrint)
-        {
-            std::cout << person.first << " - " << person.second.name << " ";
-            std::cout << person.second.surname << " age: " << person.second.age;
-            std::cout << " " << person.second.city << " PESEL: " << person.second.pesel << std::endl;
-        }
-}
+
 
 int main(int argc, char ** argv)
 {
-   
+    
+    ResultContainer testsResults {};  
+    std::size_t maximalElementsNumber { 1000 };
+
     std::vector<person::Person> listOfPersons {};
-    listOfPersons = preparePeopleList(1000);
+    listOfPersons = preparePeopleList( maximalElementsNumber );
+
+    std::vector<person::Person> smallListOfPersons {};
+    smallListOfPersons = preparePeopleList(10);
 
     std::map<std::size_t, person::Person> map {};
     std::multimap<std::size_t, person::Person> multimap {};
-
     
-    std::vector<DurationTime> testsResults;
-    std::vector<long long> ids;
-    
-    
-    std::chrono::duration<double> x = testMakeMapOfPersons(map,listOfPersons, 100);
-    printMap( map );
-
+    testsResults += testMapCreate( "std::map", map, listOfPersons, maximalElementsNumber );
+    testsResults += testMapCreate( "std::multimap", multimap, listOfPersons, maximalElementsNumber );
+    //testsResults += testMapInsert( map, smallListOfPersons, maximalElementsNumber );
+    //testsResults += testMapInsert( multimap, smallListOfPersons, maximalElementsNumber );
+   
     
 }
