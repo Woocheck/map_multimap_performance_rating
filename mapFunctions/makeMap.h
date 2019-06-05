@@ -30,11 +30,10 @@ std::chrono::duration<double> averageTimeValue( std::vector<Timer>& listOfTimers
 template <class Map>
 std::chrono::duration<double> makeMapOfPersons( Map& map, 
                               const std::vector<person::Person>& listOfPersons,  
-                              long long recordsNumber )
+                              long long recordsNumber , int keySeed = 0 )
 {
     std::vector<Timer> listOfTimers;
     Timer makeMapTimer;
-    int keySeed {0};
 
     makeMapTimer.start();
 

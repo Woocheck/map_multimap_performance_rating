@@ -21,6 +21,7 @@ ResultContainer testMapCreate( const std::string& container, Map& map,
     ResultContainer results;
     for(std::size_t elementsNumber {1}; elementsNumber <= maximalElementsNumber; elementsNumber *= 10 )
     {
+        map.clear();
         DurationTime singleTest( container );
         singleTest.testType = TypesOfTests::makeColection;
         singleTest.numberElementsInContainer = elementsNumber;
@@ -28,6 +29,23 @@ ResultContainer testMapCreate( const std::string& container, Map& map,
         
         results.results.push_back( singleTest );
     }
+    return results;
+}
+
+template<class Map>
+ResultContainer testMapInsert( const std::string& container, Map& map, 
+                                std::vector<person::Person>& listOfPersons)
+{
+    ResultContainer results;
+   
+    map.clear();
+    DurationTime singleTest( container );
+    singleTest.testType = TypesOfTests::insertElement;
+    singleTest.numberElementsInContainer = elementsNumber;
+    singleTest.duration = insertElements( map, person );
+    
+    results.results.push_back( singleTest );
+    
     return results;
 }
 

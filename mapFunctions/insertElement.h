@@ -11,15 +11,15 @@
 #include "makeMap.h"
 
 template <class Map>
-std::chrono::duration<double> insertElements( Map& map, const Map& personsToDelete ) 
+std::chrono::duration<double> insertElements( Map& map, const std::vector<person::Person>& personsToinsert ) 
 {
     std::vector<Timer> listOfTimers;
-    for(auto person : personsToDelete)
+    for(auto person : personsToinsert)
     {   
         Timer insertPeopleTimer( "Insert people id: " + person.first );
         insertPeopleTimer.start();
 
-        map.insert( std::pair<std::size_t, person::Person>( person.first , person.second ));
+        map.insert( std::pair<std::size_t, person::Person>(  , person ));
 
         insertPeopleTimer.stop();
         listOfTimers.push_back( insertPeopleTimer );
