@@ -30,16 +30,16 @@ std::chrono::duration<double> averageTimeValue( std::vector<Timer>& listOfTimers
 template <class Map>
 std::chrono::duration<double> makeMapOfPersons( Map& map, 
                               const std::vector<person::Person>& listOfPersons,  
-                              long long recordsNumber , int keySeed = 0 )
+                              long long recordsNumber )
 {
     std::vector<Timer> listOfTimers;
     Timer makeMapTimer;
-
+    int keySeed {0};
     makeMapTimer.start();
 
-        for( auto person : listOfPersons )
+        for( int i {0}; i < recordsNumber; i++ )
         {   
-            map.insert( std::make_pair( keySeed * 10 , person ) );
+            map.insert( std::make_pair( ( keySeed * 20 ), listOfPersons.at( i ) ) );
             keySeed++;
         }
     
