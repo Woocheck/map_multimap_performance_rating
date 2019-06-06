@@ -14,12 +14,12 @@
 #include "../result.h"
 
 template<class Map>
-ResultContainer testMapCreate( const std::string& container, Map& map, 
-                               const std::vector<person::Person>& listOfPersons,
-                               const std::size_t& maximalElementsNumber )
+ResultContainer testMapCreate( const std::string& container, Map& map,
+                               const std::vector<person::Person>& listOfPersons)
 {
     ResultContainer results;
-    for(std::size_t elementsNumber {1}; elementsNumber <= maximalElementsNumber; elementsNumber *= 10 )
+    
+    for(std::size_t elementsNumber {1}; elementsNumber <= listOfPersons.size(); elementsNumber *= 10 )
     {
         map.clear();
         DurationTime singleTest( container );
@@ -28,24 +28,36 @@ ResultContainer testMapCreate( const std::string& container, Map& map,
         singleTest.duration = makeMapOfPersons( map, listOfPersons, elementsNumber );
         
         results.results.push_back( singleTest );
+        std::cout << map.size() << " - map " << std::endl;
+       
     }
+
+  
+
+   
     return results;
 }
 
 template<class Map>
-ResultContainer testMapInsert( const std::string& container, Map& map, 
-                                std::vector<person::Person>& listOfPersons)
+ResultContainer testMapInsert( const std::string& container, Map& map,
+                               const std::vector<person::Person>& listOfPersons,
+                               const std::vector<person::Person>& smallListOfPersons )
 {
     ResultContainer results;
-   
-    map.clear();
-    DurationTime singleTest( container );
-    singleTest.testType = TypesOfTests::insertElement;
-    singleTest.numberElementsInContainer = elementsNumber;
-    singleTest.duration = insertElements( map, person );
     
-    results.results.push_back( singleTest );
-    
+    for(std::size_t elementsNumber {1}; elementsNumber <= listOfPersons.size(); elementsNumber *= 10 )
+    {
+        map.clear();
+        makeMapOfPersons( map, listOfPersons, elementsNumber );
+        std::cout << map.size() << " - before insert " << std::endl;
+        DurationTime singleTest( container );
+        singleTest.testType = TypesOfTests::insertElement;
+        singleTest.numberElementsInContainer = elementsNumber;
+        singleTest.duration = insertElements( map, smallListOfPersons);
+
+        results.results.push_back( singleTest );
+        std::cout << map.size() << " - after " << std::endl;
+    }
     return results;
 }
 
