@@ -29,21 +29,22 @@ int main(int argc, char ** argv)
 {
     
     ResultContainer testsResults {};  
-    std::size_t maximalElementsNumber { 1000 };
+    std::size_t maximalElementsNumber { 100 };
 
     std::vector<person::Person> listOfPersons {};
     listOfPersons = preparePeopleList( maximalElementsNumber );
-
+    std::map<std::size_t, person::Person> map {};
+    std::multimap<std::size_t, person::Person> multimap {};
     std::vector<person::Person> smallListOfPersons {};
     smallListOfPersons = preparePeopleList(10);
 
-    std::map<std::size_t, person::Person> map {};
-    std::multimap<std::size_t, person::Person> multimap {};
+
+    testsResults += testMapCreate( "std::map", map, listOfPersons);
+    testsResults += testMapCreate( "std::multimap", multimap, listOfPersons );
     
-    testsResults += testMapCreate( "std::map", map, listOfPersons, maximalElementsNumber );
-    testsResults += testMapCreate( "std::multimap", multimap, listOfPersons, maximalElementsNumber );
-    //testsResults += testMapInsert( map, smallListOfPersons, maximalElementsNumber );
-    //testsResults += testMapInsert( multimap, smallListOfPersons, maximalElementsNumber );
+    testsResults += testMapInsert( "std::map", map, listOfPersons, smallListOfPersons);
+    testsResults += testMapInsert( "std::multimap", multimap, listOfPersons, smallListOfPersons);
    
+
     
 }

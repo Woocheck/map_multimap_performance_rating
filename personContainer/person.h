@@ -39,12 +39,12 @@ struct PersonHash
 {
     std::size_t operator()(Person const& p) const noexcept
     {
-        std::size_t h1 = std::hash<std::string>{}(p.name);
-        std::size_t h2 = std::hash<int>{}(p.age);
-        std::size_t h3 = std::hash<long long>{}(p.pesel);
-        std::size_t h4 = std::hash<std::string>{}(p.city);
-        std::size_t h5 = std::hash<std::string>{}(p.surname);
-        return h1 ^ (h2 > 1) ^ (h3 > 2) ^ (h4 > 3) ^ (h5 > 4);
+        std::size_t h1 = std::hash<std::string>{}( p.name );
+        std::size_t h2 = std::hash<int>{}( p.age );
+        std::size_t h3 = std::hash<long long>{}( p.pesel );
+        std::size_t h4 = std::hash<std::string>{}( p.city );
+        std::size_t h5 = std::hash<std::string>{}( p.surname );
+        return h1 ^ ( h2 > 1 ) ^ ( h3 > 2 ) ^ ( h4 > 3 ) ^ ( h5 > 4 );
     }
 };
 
@@ -56,11 +56,11 @@ static Person get_random_person()
                                     
     std::vector<std::string> surnames{"Koryto", "Drewutnia", "Denko", "Podeszwa", "Deska", "Rower", "Wiadro",
                                     "Roman", "Kopytko", "Kartofel", "Pień", "Kowalski", "Szulc", "Czarny", 
-                                    "Niebieski", "Podobny", "Śruba", "Węgiel" };
+                                    "Niebieski", "Podobny", "Śruba", "Węgiel", "Stołek", "Krzesło" };
     std::vector<std::string> cities { "Warszawa", "Kraków", "Lódź", "Wrocław", "Poznań", "Gdańsk", "Szczecin",
-                                     "Bydgoszcz", "Lublin", "Białystok", "Katowice"};
-    Person p( names[std::rand()%names.size()], surnames[std::rand()%surnames.size()],
-              cities[std::rand()%cities.size()], std::rand()%90, std::rand());
+                                     "Bydgoszcz", "Lublin", "Białystok", "Katowice" };
+    Person p( names[ std::rand()%names.size()], surnames[std::rand()%surnames.size() ],
+              cities[ std::rand()%cities.size()], std::rand()%90, std::rand() );
     return p;
 }
 
