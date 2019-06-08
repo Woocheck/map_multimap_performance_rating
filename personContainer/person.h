@@ -11,14 +11,14 @@ struct Person
 {    
     std::string name {}; 
     std::string surname {};
-    int age;
-    std::string city ;
+    int age {0};
+    std::string city {};
     long long pesel {0};
 
     Person() = default;
     Person(const std::string& _name, const std::string& _surname, const std::string & _city,
            const int _age, const long long _pesel):
-           name(_name), surname(_surname), city(_city), age(_age), pesel(_pesel){};
+           name(_name), surname(_surname), age(_age), city(_city), pesel(_pesel){};
     
     friend std::ostream& operator<< (std::ostream& stream,const Person & person)
     {
@@ -26,13 +26,20 @@ struct Person
           << person.age << ", PESEL number: " << person.pesel;
         return stream;
     };
+    bool operator < ( const Person& rhs ) const
+    {
+        return (this->pesel < rhs.pesel);
+    };
+
+
 };
+
 
 bool operator==(const Person& lhs, const Person& rhs) 
 {
     return (lhs.name == rhs.name) &&
-           (lhs.age == rhs.age) &&
-           (lhs.pesel == rhs.pesel);
+       (lhs.age == rhs.age) &&
+       (lhs.pesel == rhs.pesel);
 }
 
 struct PersonHash
