@@ -11,21 +11,36 @@
 #include "makeMap.h"
 
 template <class Map>
-std::chrono::duration<double> deleteElements( Map& map, const Map& personsToDelete ) 
+std::chrono::duration<double> deleteElements( const Map& map, 
+                                              const std::vector<person::Person>& personsToDelete,
+                                              const std::size_t elementsNumber ) 
 {
     std::vector<Timer> listOfTimers;
-    for(auto person : personsToDelete)
-    {   
-        Timer deletePeopleTimer( "Delete people id: " + person.first );
-        deletePeopleTimer.start();
-
-        map.erase( person.first );
-
-        deletePeopleTimer.stop();
-        listOfTimers.push_back( deletePeopleTimer );
-    }
     
-    sortTimers ( listOfTimers );
+    Map MapWithElementsToDelete = map;
+    for( std::size_t i {0} ; i < personsToDelete.size() ; i ++ )
+            {   
+                    MapWithElementsToDelete.insert( std::make_pair( personsToDelete.at( i ) ,
+                                                  std::rand() ) );
+            };
+    
+    for ( int test { 0 }; test < 5 ; test++ )
+    {
+        Timer insertPeopleTimer( "Find people");
+        Map singleTestMap = MapWithElementsToDelete;
+        insertPeopleTimer.start();
+
+            for( std::size_t i {0} ; i < personsToDelete.size() ; i ++ )
+            {   
+                    singleTestMap.find( personsToDelete.at( i ) );
+            }
+
+        insertPeopleTimer.stop();
+
+        listOfTimers.push_back( insertPeopleTimer );
+    };
+    discardExtremeValues ( listOfTimers );
+    
     return averageTimeValue( listOfTimers );
 }
 
