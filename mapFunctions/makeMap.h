@@ -7,23 +7,24 @@
 #include <map>
 #include <iterator>
 #include <algorithm>
+#include <random>
 #include "../personContainer/person.h"
 #include "../timer/timer.h"
 
 
-void sortTimers( std::vector<Timer>& listOfTimers )
+void discardExtremeValues( std::vector<Timer>& listOfTimers )
 {
     std::sort( listOfTimers.begin(), listOfTimers.end() );
     listOfTimers.erase( listOfTimers.begin() );
-    if( !listOfTimers.empty() )listOfTimers.pop_back();
+    if( !listOfTimers.empty() ) listOfTimers.pop_back();
 }
 
 std::chrono::duration<double> averageTimeValue( std::vector<Timer>& listOfTimers )
 {
     std::chrono::duration<double> sumTimeValue {};
     for( auto timer : listOfTimers ) sumTimeValue += timer.getDuration();
-
     sumTimeValue /= listOfTimers.size();
+    
     return sumTimeValue;
 }
 
@@ -33,20 +34,21 @@ std::chrono::duration<double> makeMapOfPersons( Map& map,
                               long long recordsNumber )
 {
     std::vector<Timer> listOfTimers;
-    Timer makeMapTimer;
-    int keySeed {0};
-    makeMapTimer.start();
+    for ( int test { 0 }; test < 5 ; test++ )
+    {
+        map.clear();
+        Timer makeMapTimer;
+        makeMapTimer.start();
 
-        for( int i {0}; i < recordsNumber; i++ )
-        {   
-            map.insert( std::make_pair( ( keySeed * 20 ), listOfPersons.at( i ) ) );
-            keySeed++;
-        }
-    
-    makeMapTimer.stop();
-    listOfTimers.push_back( makeMapTimer );
-    
-    sortTimers( listOfTimers );
+            for( int i {0} ; i< recordsNumber ; i ++ )
+            {   
+                map.insert( std::pair<person::Person,long>( listOfPersons.at(i) , std::rand() ) );
+            }
+
+        makeMapTimer.stop();
+        listOfTimers.push_back( makeMapTimer );
+    }
+    discardExtremeValues( listOfTimers );
     return averageTimeValue( listOfTimers );
 }
 
