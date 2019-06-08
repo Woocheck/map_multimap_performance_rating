@@ -29,14 +29,15 @@ int main(int argc, char ** argv)
 {
     
     ResultContainer testsResults {};  
-    std::size_t maximalElementsNumber { 100 };
+    std::size_t maximalElementsNumber { 1000 };
 
     std::vector<person::Person> listOfPersons {};
     listOfPersons = preparePeopleList( maximalElementsNumber );
-    std::map<std::size_t, person::Person> map {};
-    std::multimap<std::size_t, person::Person> multimap {};
+    std::map< person::Person, long > map {};
+    std::unordered_multimap< person::Person, long, person::PersonHash> multimap {};
+    
     std::vector<person::Person> smallListOfPersons {};
-    smallListOfPersons = preparePeopleList(10);
+    smallListOfPersons = preparePeopleList(100);
 
 
     testsResults += testMapCreate( "std::map", map, listOfPersons);
@@ -44,7 +45,9 @@ int main(int argc, char ** argv)
     
     testsResults += testMapInsert( "std::map", map, listOfPersons, smallListOfPersons);
     testsResults += testMapInsert( "std::multimap", multimap, listOfPersons, smallListOfPersons);
-   
 
-    
+    testsResults += testFindElement( "std::map", map, listOfPersons, smallListOfPersons);
+    testsResults += testFindElement( "std::multimap", multimap, listOfPersons, smallListOfPersons);
+   
+    testsResults.print();
 }
