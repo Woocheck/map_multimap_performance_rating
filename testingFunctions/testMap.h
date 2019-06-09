@@ -52,7 +52,7 @@ ResultContainer testMapInsert( const std::string& container, Map& map,
         
         singleTest.testType = TypesOfTests::insertElement;
         singleTest.numberElementsInContainer = elementsNumber;
-        singleTest.duration = insertElements( map, smallListOfPersons, elementsNumber);
+        singleTest.duration = insertElements( map, smallListOfPersons);
 
         results.results.push_back( singleTest );
     }
@@ -74,7 +74,29 @@ ResultContainer testFindElement( const std::string& container, Map& map,
         
         singleTest.testType = TypesOfTests::findElement;
         singleTest.numberElementsInContainer = elementsNumber;
-        singleTest.duration = findElement( map, smallListOfPersons, elementsNumber);
+        singleTest.duration = findElement( map, smallListOfPersons );
+
+        results.results.push_back( singleTest );
+    }
+    return results;
+}
+
+template<class Map>
+ResultContainer testDeleteElement( const std::string& container, Map& map,
+                               const std::vector<person::Person>& listOfPersons,
+                               const std::vector<person::Person>& smallListOfPersons )
+{
+    ResultContainer results;
+    
+    for(std::size_t elementsNumber {1}; elementsNumber <= listOfPersons.size(); elementsNumber *= 10 )
+    {
+        map.clear();
+        makeMapOfPersons( map, listOfPersons, elementsNumber );
+        DurationTime singleTest( container );
+        
+        singleTest.testType = TypesOfTests::deleteElement;
+        singleTest.numberElementsInContainer = elementsNumber;
+        singleTest.duration = deleteElements( map, smallListOfPersons);
 
         results.results.push_back( singleTest );
     }
