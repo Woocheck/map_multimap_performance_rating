@@ -3,11 +3,16 @@
 
 #include <vector>
 #include <iostream>
+#include <iomanip>
+
 #include "./timer/timer.h"
 
 struct ResultContainer
 {
     std::vector<DurationTime> results;
+
+    ResultContainer() = default;
+    ResultContainer(std::vector<DurationTime>& result ): results( result ){};
 
     inline ResultContainer& operator+=( const ResultContainer& newResults)
     {
@@ -15,15 +20,14 @@ struct ResultContainer
             results.push_back( result );
         return *this;
     }
-    ResultContainer() = default;
-    ResultContainer(std::vector<DurationTime>& result ): results( result ){};
 
     void print()
     {
         std::for_each(std::begin( results ), std::end( results ), [](DurationTime test){
-            std::cout << test.containerType << " - " ;
-            std::cout << test.numberElementsInContainer << " elements ";
-            std::cout << " duration: " << test.duration.count() << std::endl;
+            std::cout << std::setw( 15 ) << std::left << test.containerType << " - " ;
+            std::cout << std::setw( 10 ) << std::right <<test.numberElementsInContainer << " elements ";
+            std::cout << " duration: " << std::setw( 12 ) << std::setprecision( 8 ) << std::fixed 
+                      << test.duration.count() << " s" << std::endl;
         });
     }
 };
