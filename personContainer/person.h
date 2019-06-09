@@ -71,6 +71,6 @@ static Person get_random_person()
     return p;
 }
 
-} //namespace person
+} 
 
 #endif 
