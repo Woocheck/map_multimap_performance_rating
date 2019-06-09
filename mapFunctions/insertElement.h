@@ -14,8 +14,7 @@
 
 template <class Map>
 std::chrono::duration<double> insertElements( const Map& map, 
-                                              const std::vector<person::Person>& personsToinsert,
-                                              const std::size_t elementsNumber ) 
+                              const std::vector<person::Person>& personsToinsert) 
 {
     std::vector<Timer> listOfTimers;
     
@@ -28,15 +27,15 @@ std::chrono::duration<double> insertElements( const Map& map,
 
             for( std::size_t i {0} ; i < personsToinsert.size() ; i ++ )
             {   
-                    singleTestMap.insert( std::make_pair( personsToinsert.at( i ) , std::rand() ) );
+                    singleTestMap.insert( std::make_pair( personsToinsert.at( i ),
+                                          std::rand() ) );
             }
 
         insertPeopleTimer.stop();
-
         listOfTimers.push_back( insertPeopleTimer );
     };
+
     discardExtremeValues ( listOfTimers );
-    
     return averageTimeValue( listOfTimers );
 }
 

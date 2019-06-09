@@ -12,13 +12,12 @@
 
 template <class Map>
 std::chrono::duration<double> deleteElements( const Map& map, 
-                                              const std::vector<person::Person>& personsToDelete,
-                                              const std::size_t elementsNumber ) 
+                                              const std::vector<person::Person>& personsToDelete) 
 {
     std::vector<Timer> listOfTimers;
     
     Map MapWithElementsToDelete = map;
-    for( std::size_t i {0} ; i < personsToDelete.size() ; i ++ )
+    for( std::size_t i { 0 } ; i < personsToDelete.size() ; i ++ )
             {   
                     MapWithElementsToDelete.insert( std::make_pair( personsToDelete.at( i ) ,
                                                   std::rand() ) );
@@ -32,15 +31,14 @@ std::chrono::duration<double> deleteElements( const Map& map,
 
             for( std::size_t i {0} ; i < personsToDelete.size() ; i ++ )
             {   
-                    singleTestMap.find( personsToDelete.at( i ) );
+                    singleTestMap.erase( personsToDelete.at( i ) );
             }
 
         insertPeopleTimer.stop();
-
         listOfTimers.push_back( insertPeopleTimer );
     };
+
     discardExtremeValues ( listOfTimers );
-    
     return averageTimeValue( listOfTimers );
 }
 

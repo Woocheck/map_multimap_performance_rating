@@ -15,8 +15,7 @@
 
 template <class Map>
 std::chrono::duration<double> findElement( const Map& map, 
-                                              const std::vector<person::Person>& personsToifind,
-                                              const std::size_t elementsNumber ) 
+                                           const std::vector<person::Person>& personsToifind) 
 {
     std::vector<Timer> listOfTimers;
     
