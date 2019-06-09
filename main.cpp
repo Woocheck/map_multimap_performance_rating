@@ -1,6 +1,10 @@
 #include <map>
 #include <unordered_map>
 #include <map>
+#include <fstream>
+#include <string>
+#include <iostream>
+#include <ostream>
 #include "./personContainer/person.h"
 #include "./timer/timer.h"
 #include "./mapFunctions/findElement.h"
@@ -23,13 +27,50 @@ std::vector<person::Person> preparePeopleList( const long elementsNumber)
     return peopleVector;
 }
 
+void saveResultsInFile( const ResultContainer& testsResults )
+{
+    std::ofstream out("./makemap.txt"); 
 
+    for( const auto& test : testsResults.results )
+    {
+        out << test.containerType << ",";
+        switch (test.testType)
+        {
+        case TypesOfTests::makeColection :
+            {
+               out << "make_collection" << ","; 
+            }
+            break;
+        case TypesOfTests::insertElement :
+            {
+               out << "insert_element" << ","; 
+            }
+            break;        
+        case TypesOfTests::findElement :
+            {
+               out << "find_element" << ","; 
+            }
+            break;
+        case TypesOfTests::deleteElement :
+            {
+               out << "delete_element" << ","; 
+            }
+            break;
+        default:
+            break;
+        }
+        out << test.numberElementsInContainer << ",";
+        out << test.duration.count() << std::endl;
+    }
+    
+    out.close();
+}
 
 int main(int argc, char ** argv)
 {
     
     ResultContainer testsResults {};  
-    std::size_t maximalElementsNumber { 1000 };
+    std::size_t maximalElementsNumber { 10000000 };
 
     std::vector<person::Person> listOfPersons {};
     listOfPersons = preparePeopleList( maximalElementsNumber );
@@ -48,6 +89,10 @@ int main(int argc, char ** argv)
 
     testsResults += testFindElement( "std::map", map, listOfPersons, smallListOfPersons);
     testsResults += testFindElement( "std::multimap", multimap, listOfPersons, smallListOfPersons);
-   
+    
+    testsResults += testDeleteElement( "std::map", map, listOfPersons, smallListOfPersons);
+    testsResults += testDeleteElement( "std::multimap", multimap, listOfPersons, smallListOfPersons);
+    
     testsResults.print();
+    saveResultsInFile( testsResults );
 }
