@@ -27,11 +27,12 @@ std::chrono::duration<double> deleteElements( const Map& map,
     {
         Timer insertPeopleTimer( "Find people");
         Map singleTestMap = MapWithElementsToDelete;
+        
         insertPeopleTimer.start();
 
             for( std::size_t i {0} ; i < personsToDelete.size() ; i ++ )
             {   
-                    singleTestMap.erase( personsToDelete.at( i ) );
+                singleTestMap.erase( personsToDelete.at( i ) );
             }
 
         insertPeopleTimer.stop();

@@ -22,14 +22,15 @@ std::chrono::duration<double> findElement( const Map& map,
     Map MapWithElementsToFind = map;
     for( std::size_t i {0} ; i < personsToifind.size() ; i ++ )
             {   
-                    MapWithElementsToFind.insert( std::make_pair( personsToifind.at( i ) ,
-                                                  std::rand() ) );
+                MapWithElementsToFind.insert( std::make_pair( personsToifind.at( i ) ,
+                                              std::rand() ) );
             };
     
     for ( int test { 0 }; test < 5 ; test++ )
     {
         Timer insertPeopleTimer( "Find people");
         Map singleTestMap = MapWithElementsToFind;
+        
         insertPeopleTimer.start();
 
             for( std::size_t i {0} ; i < personsToifind.size() ; i ++ )
@@ -38,7 +39,6 @@ std::chrono::duration<double> findElement( const Map& map,
             }
 
         insertPeopleTimer.stop();
-
         listOfTimers.push_back( insertPeopleTimer );
     };
     discardExtremeValues ( listOfTimers );

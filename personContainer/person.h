@@ -16,35 +16,33 @@ struct Person
     long long pesel {0};
 
     Person() = default;
-    Person(const std::string& _name, const std::string& _surname, const std::string & _city,
-           const int _age, const long long _pesel):
-           name(_name), surname(_surname), age(_age), city(_city), pesel(_pesel){};
+    Person( const std::string& _name, const std::string& _surname, const std::string & _city,
+           const int _age, const long long _pesel ):
+           name( _name ), surname( _surname ), age( _age ), city( _city ), pesel( _pesel ){};
     
-    friend std::ostream& operator<< (std::ostream& stream,const Person & person)
+    friend std::ostream& operator<<( std::ostream& stream, const Person & person )
     {
         stream << person.name << " " << person.surname << " from " << person.city << ", age "
-          << person.age << ", PESEL number: " << person.pesel;
+               << person.age << ", PESEL number: " << person.pesel;
         return stream;
     };
-    bool operator < ( const Person& rhs ) const
+
+    bool operator<( const Person& rhs ) const
     {
-        return (this->pesel < rhs.pesel);
+        return ( this->pesel < rhs.pesel );
     };
-
-
 };
 
-
-bool operator==(const Person& lhs, const Person& rhs) 
+bool operator==( const Person& lhs, const Person& rhs ) 
 {
-    return (lhs.name == rhs.name) &&
-       (lhs.age == rhs.age) &&
-       (lhs.pesel == rhs.pesel);
+    return ( lhs.name == rhs.name ) &&
+           ( lhs.age == rhs.age ) &&
+           ( lhs.pesel == rhs.pesel );
 }
 
 struct PersonHash
 {
-    std::size_t operator()(Person const& p) const noexcept
+    std::size_t operator()( Person const& p ) const noexcept
     {
         std::size_t h1 = std::hash<std::string>{}( p.name );
         std::size_t h2 = std::hash<int>{}( p.age );

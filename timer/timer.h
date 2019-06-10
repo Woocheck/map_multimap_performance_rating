@@ -7,19 +7,16 @@
 #include <typeindex>
 #include <typeinfo>
 
-enum class TypesOfTests {makeColection, insertElement, findElement, deleteElement };
+enum class TypesOfTests { makeColection, insertElement, findElement, deleteElement };
 
 struct DurationTime
 {
-    
     std::string containerType;
     TypesOfTests testType {};
     long numberElementsInContainer {};
     std::chrono::duration<double> duration;
     DurationTime() = default;
-    DurationTime(std::string type): containerType(type) {};
-    
-    
+    DurationTime( std::string type ): containerType( type ) {};   
 };
 class Timer
 {
@@ -31,16 +28,16 @@ class Timer
 
     public:
         Timer() = default;
-        Timer(const std::string& s): id(s){};
+        Timer( const std::string& s ): id( s ){};
 
         void start()
         {
-            timerStart = (std::chrono::steady_clock::now());
+            timerStart = ( std::chrono::steady_clock::now() );
         }
 
         void stop()
         {
-            timerStop = (std::chrono::steady_clock::now());
+            timerStop = ( std::chrono::steady_clock::now()) ;
             duration = timerStop - timerStart;
         }
 
@@ -49,10 +46,10 @@ class Timer
             return duration;
         }
 
-        bool operator < (const Timer& compared ) const
-    {
+        bool operator<(const Timer& compared ) const
+        {
         return ( duration < compared.getDuration() );
-    }
+        }
 };
 
 #endif

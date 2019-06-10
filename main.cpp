@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <ostream>
+
 #include "./personContainer/person.h"
 #include "./timer/timer.h"
 #include "./mapFunctions/findElement.h"
@@ -16,7 +17,7 @@
 
 
 
-std::vector<person::Person> preparePeopleList( const long elementsNumber)
+std::vector<person::Person> preparePeopleList( const long elementsNumber )
 {
     std::vector<person::Person> peopleVector {};
     for ( int i = 0 ; i < elementsNumber ; ++i ) 
@@ -29,12 +30,12 @@ std::vector<person::Person> preparePeopleList( const long elementsNumber)
 
 void saveResultsInFile( const ResultContainer& testsResults )
 {
-    std::ofstream out("./makemap.txt"); 
+    std::ofstream out( "./mapscompairingresults.txt" ); 
 
     for( const auto& test : testsResults.results )
     {
         out << test.containerType << ",";
-        switch (test.testType)
+        switch ( test.testType )
         {
         case TypesOfTests::makeColection :
             {
@@ -62,7 +63,6 @@ void saveResultsInFile( const ResultContainer& testsResults )
         out << test.numberElementsInContainer << ",";
         out << test.duration.count() << std::endl;
     }
-    
     out.close();
 }
 
@@ -70,7 +70,7 @@ int main(int argc, char ** argv)
 {
     
     ResultContainer testsResults {};  
-    std::size_t maximalElementsNumber { 10000000 };
+    std::size_t maximalElementsNumber { 100000 };
 
     std::vector<person::Person> listOfPersons {};
     listOfPersons = preparePeopleList( maximalElementsNumber );
@@ -78,7 +78,7 @@ int main(int argc, char ** argv)
     std::unordered_multimap< person::Person, long, person::PersonHash> multimap {};
     
     std::vector<person::Person> smallListOfPersons {};
-    smallListOfPersons = preparePeopleList(100);
+    smallListOfPersons = preparePeopleList( 100 );
 
 
     testsResults += testMapCreate( "std::map", map, listOfPersons);

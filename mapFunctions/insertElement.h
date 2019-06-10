@@ -18,7 +18,6 @@ std::chrono::duration<double> insertElements( const Map& map,
 {
     std::vector<Timer> listOfTimers;
     
-    
     for ( int test { 0 }; test < 5 ; test++ )
     {
         Timer insertPeopleTimer( "Insert people");
@@ -27,10 +26,10 @@ std::chrono::duration<double> insertElements( const Map& map,
 
             for( std::size_t i {0} ; i < personsToinsert.size() ; i ++ )
             {   
-                    singleTestMap.insert( std::make_pair( personsToinsert.at( i ),
-                                          std::rand() ) );
+                singleTestMap.insert( std::make_pair( personsToinsert.at( i ),
+                                      std::rand() ) );
             }
-
+            
         insertPeopleTimer.stop();
         listOfTimers.push_back( insertPeopleTimer );
     };
