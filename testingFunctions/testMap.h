@@ -11,7 +11,7 @@
 #include "../mapFunctions/insertElement.h"
 #include "../mapFunctions/findElement.h"
 #include "../mapFunctions/makeMap.h"
-#include "../result.h"
+#include "../result/result.h"
 
 
 template<class Map>
