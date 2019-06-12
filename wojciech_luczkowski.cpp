@@ -85,16 +85,16 @@ int main()
 
 
     testsResults += testMapCreate( "std::map", map, listOfPersons);
-    testsResults += testMapCreate( "std::multimap", multimap, listOfPersons );
+    testsResults += testMapCreate( "unordered_map", multimap, listOfPersons );
     
     testsResults += testMapInsert( "std::map", map, listOfPersons, smallListOfPersons);
-    testsResults += testMapInsert( "std::multimap", multimap, listOfPersons, smallListOfPersons);
+    testsResults += testMapInsert( "unordered_map", multimap, listOfPersons, smallListOfPersons);
 
     testsResults += testFindElement( "std::map", map, listOfPersons, smallListOfPersons);
-    testsResults += testFindElement( "std::multimap", multimap, listOfPersons, smallListOfPersons);
+    testsResults += testFindElement( "unordered_map", multimap, listOfPersons, smallListOfPersons);
     
     testsResults += testDeleteElement( "std::map", map, listOfPersons, smallListOfPersons);
-    testsResults += testDeleteElement( "std::multimap", multimap, listOfPersons, smallListOfPersons);
+    testsResults += testDeleteElement( "unordered_map", multimap, listOfPersons, smallListOfPersons);
     
     testsResults.print();
     saveResultsInFile( testsResults );
