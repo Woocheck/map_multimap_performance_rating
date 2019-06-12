@@ -3,5 +3,11 @@ main
 /home/user/performance_rating/performancerating.code-workspace
 /home/user/performance_rating/zadanie.txt
 /home/user/performance_rating/map_multimap_performance_rating/build
+
 makemap.txt
 wojciech_luczkowski
+CMakeFiles/CMakeOutput.log
+CMakeFiles/cmake.check_cache
+CMakeFiles/3.14.5/CMakeSystem.cmake
+recompile.sh
+CMakeCache.txt
