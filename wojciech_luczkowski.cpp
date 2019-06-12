@@ -72,7 +72,7 @@ int main()
 {
     
     ResultContainer testsResults {};  
-    std::size_t maximalElementsNumber { 100000 };
+    std::size_t maximalElementsNumber { 10000 };
 
     std::vector<person::Person> listOfPersons {};
     listOfPersons = preparePeopleList( maximalElementsNumber );
